@@ -1,0 +1,35 @@
+.btn-eliminar-art{
+    background-color: rgb(231, 87, 87);
+}
+.btn-eliminar-art:hover{
+    background-color: rgb(226, 27, 27);
+}
+.fila-producto:hover{  
+    border-bottom: 2px solid rgba(128, 128, 128, 0.692) !important;
+    border-right: 2px solid rgba(128, 128, 128, 0.692) !important;
+    border-radius: 3px;
+    
+}
+th{
+    text-align: left!important;
+}
+tr{
+    text-align: right!important;
+}
+.spinner-border{
+    width: 100px;
+    height: 100px;
+}
+.link-comprar{
+    text-decoration: none;
+    color: white !important;
+}
+.btn-comprar{
+    padding-top: 6px;
+    padding-left: 20px;
+    padding-bottom: 6px;
+    padding-right: 20px;
+    border: none;
+    background-color: gray;
+    border-radius: 20px;
+}

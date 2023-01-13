@@ -1,0 +1,24 @@
+.agregar_art{
+    background-color: rgb(145, 151, 145);
+    border: none;
+}
+.agregar_art:hover{
+    background-color: rgb(92, 99, 92);
+}
+.eliminar_art{
+    background-color: rgb(145, 151, 145);
+    border: none;
+}
+.eliminar_art:hover{
+    background-color: rgb(92, 99, 92);
+}
+.btn-agregar{
+    border: none;
+    border-radius: 3rem;
+    background-color: rgb(216, 167, 32);
+
+}
+.btn-agregar:hover{
+    background-color: rgb(202, 156, 28);
+
+}
