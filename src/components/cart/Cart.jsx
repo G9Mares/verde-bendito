@@ -3,13 +3,18 @@ import { CartContext } from '../../context/CartContext'
 import "./Cart.css"
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import CartItem from '../cartItem/CartItem'
+import Form from '../form/Form'
+
 function Cart() {
     const navigate = useNavigate()
-    const {cart,CleanCart,datosCart} = useContext(CartContext)
-    
+    const {cart,CleanCart,datosCart,borrarProducto,setcart} = useContext(CartContext)
+
+
     const cantidad_productos = datosCart().suma
     const total = datosCart().totales
-    console.log()
+    
+    
     function ver_producto(id) {
        navigate("/itemDetail/"+id)
     }
@@ -17,9 +22,9 @@ function Cart() {
 
     if (cart.length<1) {
         return (
-            <div class=" text-center justify-content-center mt-5">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
+            <div className=" text-center justify-content-center mt-5">
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
                 </div>
                 <div className="container mt-2">
                     <h3>Parece que aun no haz agregado nada al carrito</h3>
@@ -35,21 +40,7 @@ function Cart() {
 
         {
             cart.map(item=>(
-                <div className="row border fila-producto " key={item.id} onClick={()=>ver_producto(item.id)} >
-                    <div className="col-3">
-                        <img src={item.img} className="w-50 mt-3" alt="" />
-                    </div>
-                    <div className="col-7">
-                        <h2>{item.nombre}</h2>
-                        <p>{item.descripcion}</p>
-                    </div>
-                    <div className="col-2 text-center">
-                        <p className='mt-3'>
-                            {item.cantidad}
-                        </p>
-                        <button className='btn-eliminar-art mb-2'><i class="bi bi-trash3"></i></button>
-                    </div>
-                </div>
+                <CartItem key={item.id} item ={item} ver_producto={ver_producto} borrar_producto={borrarProducto} />
             ))
         }
         <div className="container text-center">
@@ -90,9 +81,24 @@ function Cart() {
                         </tbody>
                         </table>
                     </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" className="btn btn-success">Pagar</button>
+                    <div className="modal-foote w-100 ">
+                    <div className="accordion accordion-flush" id="accordionFlushExample">
+                        <div className="accordion-item text-end me-3 pb-3">
+                            <h2 className="accordion-header" id="flush-headingOne">
+
+                            <button type="button" className="btn btn-secondary me-2" data-bs-dismiss="modal">Cerrar</button>
+
+                            <button className="btn btn-success " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Pagar
+                            </button>
+                            
+                            </h2>
+                            <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div className="accordion-body"><Form cart={cart} total={total} CleanCart ={CleanCart} setcart ={setcart} ></Form> </div>
+                            </div>
+                        </div>
+                        </div>
+
                     </div>
                     </div>
                 </div>

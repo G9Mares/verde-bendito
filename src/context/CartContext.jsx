@@ -30,7 +30,6 @@ function CartContextProvider({children}) {
         }
         else{
             setcart([...cart,articulo])
-            console.log(cart)
         }
 
         
@@ -52,6 +51,23 @@ function CartContextProvider({children}) {
         
     }
 
+    function borrarProducto(id) {
+      Swal.fire({
+        title: 'Quieres eliminar este producto?',
+        showDenyButton: true,
+        confirmButtonText: 'Cancelar',
+        denyButtonText: `Borrar producto`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isDenied) {
+          Swal.fire('Producto eliminado', "",'success')
+          const newArray = cart.filter(producto => producto.id !== id)
+      setcart(newArray)
+        }
+      })     
+      
+    }
+
     const datosCart = () => {
         let suma = 0;
         let totales =0
@@ -65,7 +81,7 @@ function CartContextProvider({children}) {
         return {suma,totales};
       };
 
-    const data = {cart,AddCart,CleanCart,datosCart}
+    const data = {cart,AddCart,CleanCart,datosCart,borrarProducto,setcart}
   return (
     <CartContext.Provider value={data}>
         {children}
