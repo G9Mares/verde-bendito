@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Verde Bendito
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esta aplicacion es de una e-commerce de comida rapida mexicana, fabricado con React
 
-## Available Scripts
+## Iniciar el proyecto
 
-In the project directory, you can run:
+Para usar el proyecto clona el repositorio y ejecuta el comando npm start
 
-### `npm start`
+## Caracteristicas generales del proyecto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Se enlistaran las librerias y aplicaciones externas usadas en este proyecto:    
+-[Firebase]( https://firebase.google.com/):  
+    Se utilizo para hacer el almacenamiento de productos y de ordenes  
+  
+-[Bootstrap v5]( https://getbootstrap.com/docs/5.0/getting-started/introduction/):  
+    Se utilizo para hacer el layout, diseños y componenetes  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-[Sweet Alert](https://sweetalert2.github.io/):  
+    Se utilixo para crear alertas agradables a la experiencia del usuario  
+  
+-[Material UI ](https://mui.com/ ):  
+    Se utilizo para el diseño de algunos componentes del proyecto  
+  
+-[React-phone-number-input](https://gitlab.com/catamphetamine/react-phone-number-input):  
+    Se utilizo para capturar con formato el numero de telefono en el formulario  
+  
+Es un e-comerce que te permite navegar entre diferentes articuos seccionados por categoria, crear un carro de compra,   editar el carro de compra y cerrar la compra con un formulario para crear la orden.  
 
-### `npm test`
+## Funcionamineto general y enfoque del proyecto
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Decidi utilizar bootstrap atraves de el CDN para el diseño de la web, la parte que mas me costo fue el formulario para la compra ya que este se encuentra en un modal, mismo que causaba problemas al momento de terminar el proceso, se soluciono con:
+```javascript
 
-### `npm run build`
+document.getElementById('closeModal').click() 
+```
+Se dicidio usar en modal ya que le daba un mejor uso del espacio en la pantalla, el principal reto fue que no pude crear un componente "modal" externo y el codigo tanto para el Form como para el cart quedo muy extenso 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Tambien para hacer una mejor experiencia al usuario cada que agregaba un producto se le enviaba de vuelta a la pagina principal para que siguiera comprando con la herramienta de react-router-dom 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```javascript
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    const navigate = useNavigate()
+    navigate("/")
+```
+Esta funcion es reciente ya que, la mayoria de los tutoriales o documentacion mencionaban otros metodos que ya no se encuentran en dicha libreria
 
-### `npm run eject`
+## Variables de entorno
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```javascript
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    const firebaseConfig = {
+        apiKey: process.env.REACT_APP_API_KEY,
+        authDomain: process.env.REACT_APP_AUTH_DOMAIN ,
+        projectId: process.env.REACT_APP_PROJECT_ID,
+        storageBucket:process.env.REACT_APP_STORAGE_BUCKET ,
+        messagingSenderId:process.env.REACT_APP_MESSAGIN ,
+        appId:process.env.REACT_APP_ID
+};
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dicha variables deben ser configuradas en un .env que se encuentre en la carpeta raiz, los valores seran arrojados cuando configures el proyecto en la consola de firebase

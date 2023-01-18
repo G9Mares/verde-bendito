@@ -6,6 +6,8 @@ import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom"
 
 function Form(cart){
+    const [aviso,setaviso] = useState("Confirma tu correo electronico")
+    const [conf_correo,setconf_correo] = useState("")
     const [correo,setcorreo] = useState("")
     const [nombre,setnombre] = useState("")
     const [telefono,settelefono] = useState("")
@@ -22,26 +24,33 @@ function Form(cart){
             showConfirmButton: true,
           })
         cart.setcart([])
+
     }
 
     function handleSubmit(e) {
         e.preventDefault()
+        if (correo === conf_correo ) {
+            const nuevo_usu = {
+                nombre: nombre,
+                correo: correo,
+                telefono: telefono
+            }
+            const nueva_orden = {
+                buyer: nuevo_usu,
+                items: cart.cart,
+                total:cart.total,
+                date: serverTimestamp()
+            }
 
-        const nuevo_usu = {
-            nombre: nombre,
-            correo: correo,
-            telefono: telefono
-        }
-        const nueva_orden = {
-            buyer: nuevo_usu,
-            items: cart.cart,
-            total:cart.total,
-            date: serverTimestamp()
+            const orderCollection = collection(database,"Ordenes")
+            addDoc(orderCollection,nueva_orden)
+            .then(res=>acion_compra(res.id))
+            document.getElementById('closeModal').click()
+        }else{
+            setaviso("Los correos no coinciden")
         }
 
-        const orderCollection = collection(database,"Ordenes")
-        addDoc(orderCollection,nueva_orden)
-        .then(res=>acion_compra(res.id))
+        
             
     }
 
@@ -59,11 +68,16 @@ function Form(cart){
             <div className="form-text ">Escribe tu correo electronico </div>
         </div>
         <div className="mb-3 text-start">
+            <label htmlFor="conf_correo" className="form-label">Confirma tu correo</label>
+            <input type="email" required className="form-control" id="conf_correo" aria-describedby="emailHelp" value={conf_correo} onChange={(e)=>setconf_correo(e.target.value)} />
+            <div className="form-text ">{aviso} </div>
+        </div>
+        <div className="mb-3 text-start">
             <label htmlFor="numero_tel" className="form-label">Numero de telefono</label>
             <PhoneInput className="form-control" required id="numero_tel" defaultCountry="MX" value={telefono} onChange={settelefono} />
             <div className="form-text">Escribe tu telefono</div>
         </div>
-  <button type="submit" data-bs-dismiss="modal" className="btn btn-primary">Submit</button>
+  <button type="submit"  className="btn btn-primary">Finalizar compra</button>
 </form>
   )
 }

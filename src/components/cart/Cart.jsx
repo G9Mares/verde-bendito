@@ -86,7 +86,7 @@ function Cart() {
                         <div className="accordion-item text-end me-3 pb-3">
                             <h2 className="accordion-header" id="flush-headingOne">
 
-                            <button type="button" className="btn btn-secondary me-2" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" className="btn btn-secondary me-2" data-bs-dismiss="modal" id='closeModal'>Cerrar</button>
 
                             <button className="btn btn-success " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                 Pagar

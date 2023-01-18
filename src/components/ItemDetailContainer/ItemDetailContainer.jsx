@@ -1,5 +1,5 @@
 import React, { useEffect, useState , useContext } from 'react'
-//import { products } from '../../ProductsMock'
+
 import {  useParams , useNavigate} from 'react-router-dom'
 import "./ItemDetailContainer.css"
 import ItemCounter from '../itemcounter/ItemCounter'
@@ -19,8 +19,6 @@ function ItemDetailContainer() {
     
     useEffect(()=>{
 
-        // const productSelect = products.find(producto=>producto.id === +id)
-        // setProduct(productSelect)
         const itemCollection = collection(database,"Productos")
         const ref = doc(itemCollection,id)
         getDoc(ref)
