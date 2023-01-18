@@ -21,9 +21,6 @@ function NavBar() {
                 <li className="nav-item">
                     <Link className="nav-link" to="/Categoria/Postres">Postres</Link>
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/Categoria/Bebidas">Bebidas</Link>
-                </li>
             </ul>
             <ul className="navbar-nav ms-auto me-3 mb-2 mb-md-0">
                 
